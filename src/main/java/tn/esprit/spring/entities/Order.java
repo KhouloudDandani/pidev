@@ -1,6 +1,9 @@
 package tn.esprit.spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -8,6 +11,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -16,10 +22,11 @@ public class Order {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private User customer;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderLine> orderLines = new ArrayList<>();
+    private List<OrderLine> orderLines ;
 
     @OneToOne(mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true)
     private Invoice invoice;

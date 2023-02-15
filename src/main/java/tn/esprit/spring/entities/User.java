@@ -1,6 +1,8 @@
 package tn.esprit.spring.entities;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import lombok.*;
 
