@@ -21,7 +21,7 @@ import java.util.List;
         private int id;
 
         @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-        @JsonBackReference
+        @JsonIgnore
         private List<OrderLine> orderLines = new ArrayList<>();
 
         // getters and setters

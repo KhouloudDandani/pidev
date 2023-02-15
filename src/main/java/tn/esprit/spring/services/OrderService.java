@@ -7,6 +7,8 @@ import tn.esprit.spring.entities.Order;
 import tn.esprit.spring.repositories.IOrderLineRepository;
 import tn.esprit.spring.repositories.IOrderRepository;
 
+import java.util.List;
+
 @Service
 public class OrderService implements IOrderService {
     @Autowired
@@ -25,13 +27,24 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public void deleteOrder(int id) {
-        orderRepository.deleteById(id);
+    public boolean deleteOrder(int id) {
+        if(orderRepository.existsById(id)){
+            orderRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public Order getOrder(int id) {
-        return orderRepository.findById(id).get();
+        if(orderRepository.existsById(id)){
+            return orderRepository.findById(id).get();
+        }
+        return null;
+    }
+    @Override
+    public List<Order> getAllOrders(){
+        return orderRepository.findAll();
     }
 
 }

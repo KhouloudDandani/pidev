@@ -1,5 +1,6 @@
 package tn.esprit.spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -18,12 +19,11 @@ public class OrderLine {
     private int id;
     private int quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.EAGER)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     private Order order;
 
 

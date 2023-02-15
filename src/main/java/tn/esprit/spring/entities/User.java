@@ -3,6 +3,7 @@ package tn.esprit.spring.entities;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 import lombok.*;
 
@@ -26,6 +27,7 @@ public class User {
     private String Email;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Order> orders = new ArrayList<>();
 
 
